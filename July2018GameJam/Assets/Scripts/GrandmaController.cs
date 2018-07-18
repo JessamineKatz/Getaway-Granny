@@ -8,9 +8,17 @@ public class GrandmaController : MonoBehaviour
 
     public float BaseSpeed = 5; //public variables are exposed in the Unity inspector.
 
+    private static GameObject granny;
+
+    public static GameObject GetInstance()
+    {
+        return granny;
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
+	    granny = this.gameObject;
 	    Rigidbody = this.GetComponent<Rigidbody2D>();
     }
 
