@@ -1,11 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Pathfinding;
 using UnityEngine;
 
 public class GuardController : MonoBehaviour
 {
-    public Transform targetPosition;
+    public List<Transform> targetPositions;
+    public int targetPositionIndex = 0;
+
+    public DateTime lastTimeGrannySeen = DateTime.Now;
+    public Boolean followingGranny = false;
 
     private Seeker seeker;
     private Rigidbody2D rigidbody;
@@ -30,7 +36,7 @@ public class GuardController : MonoBehaviour
 
         // Start a new path to the targetPosition, call the the OnPathComplete function
         // when the path has been calculated (which may take a few frames depending on the complexity)
-        seeker.StartPath(transform.position, targetPosition.position, OnPathComplete);
+        seeker.StartPath(transform.position, targetPositions[0].position, OnPathComplete);
     }
 
     public void OnPathComplete(Path p)
@@ -97,6 +103,27 @@ public class GuardController : MonoBehaviour
 
         // Move the agent
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
-        GetComponent<Rigidbody2D>().velocity = velocity; 
+        GetComponent<Rigidbody2D>().velocity = velocity;
+
+        if (!followingGranny && DateTime.Now.Subtract(lastTimeGrannySeen).Seconds < 1)
+        {
+            followingGranny = true;
+            path = null;
+            seeker.StartPath(transform.position, GrandmaController.GetInstance().transform.position, OnPathComplete);
+        } else if (reachedEndOfPath) {
+            path = null;
+            PathToNextMarker();
+        } else if (followingGranny && DateTime.Now.Subtract(lastTimeGrannySeen).Seconds >= 1)
+        {
+            followingGranny = false;
+            path = null;
+            seeker.StartPath(transform.position, targetPositions[targetPositionIndex].position, OnPathComplete);
+        }
+    }
+
+    private void PathToNextMarker()
+    {
+        targetPositionIndex = ++targetPositionIndex == targetPositions.Count ? 0 : targetPositionIndex;
+        seeker.StartPath(transform.position, targetPositions[targetPositionIndex].position, OnPathComplete);
     }
 }
