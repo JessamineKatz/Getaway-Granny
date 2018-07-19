@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114700202391161700}
   - component: {fileID: 50020035764459698}
   - component: {fileID: 61704820889453106}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grandma
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4267255617340212}
   - component: {fileID: 20174676754188524}
   - component: {fileID: 81290196589400540}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

@@ -36,13 +36,18 @@ public class FOVDraw: MonoBehaviour
     public MeshFilter viewMeshFilter;
     Mesh viewMesh;
 
+    public Rigidbody2D rigidbody;
+    public float rotSpeed;
+
     void Start()
     {
+        this.viewAngle = 90;
+        Debug.Log("Startin' vision cone up.");
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
-        Console.WriteLine("Startin' up.");
         StartCoroutine("FindTargetsWithDelay", .2f);
+
     }
 
 
@@ -57,7 +62,37 @@ public class FOVDraw: MonoBehaviour
 
     void LateUpdate()
     {
+        //rotate vision cone accordingly.
+        Vector2 curentVelocity = rigidbody.velocity;
+        float goalAngle = Vector2.Angle(curentVelocity, Vector2.right);
+
+        goalAngle = goalAngle / 8;
+        goalAngle = Mathf.Round(goalAngle);
+        goalAngle *= 8;
+
+        float currentAngle = this.transform.rotation.eulerAngles.z;
+
+        float angleChange = rotSpeed * Time.deltaTime;
+
+        if (Mathf.Abs(angleChange) > Mathf.Abs(goalAngle - currentAngle))
+        {
+            this.transform.rotation = Quaternion.Euler(0, 0, goalAngle);
+        }
+        else
+        {
+            angleChange *= Mathf.Sign(goalAngle - currentAngle);
+            this.transform.rotation = Quaternion.Euler(0, 0, currentAngle + angleChange);
+        }
+
+        //Debug.Log("Current: " + currentAngle + " Goal: " + goalAngle + " Change: " + angleChange);
+
+
         DrawFieldOfView();
+    }
+
+    void OnPreRender()
+    {
+        
     }
 
     void FindVisibleTargets()
@@ -89,7 +124,7 @@ public class FOVDraw: MonoBehaviour
         ViewCastInfo oldViewCast = new ViewCastInfo();
         for (int i = 0; i <= stepCount; i++)
         {
-            float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
+            float angle = this.transform.rotation.eulerAngles.z - viewAngle / 2 + stepAngleSize * i + 90;
             ViewCastInfo newViewCast = ViewCast(angle);
 
             if (i > 0)
@@ -131,6 +166,8 @@ public class FOVDraw: MonoBehaviour
                 triangles[i * 3 + 2] = i + 2;
             }
         }
+
+     
 
         viewMesh.Clear();
 
