@@ -39,6 +39,8 @@ public class FOVDraw: MonoBehaviour
     public Rigidbody2D rigidbody;
     public float rotSpeed;
 
+    public VisionCone vision;
+
     void Start()
     {
         this.viewAngle = 90;
@@ -47,7 +49,7 @@ public class FOVDraw: MonoBehaviour
         viewMesh.name = "View Mesh";
         viewMeshFilter.mesh = viewMesh;
         StartCoroutine("FindTargetsWithDelay", .2f);
-
+        vision = GetComponent<VisionCone>();
     }
 
 
@@ -64,11 +66,23 @@ public class FOVDraw: MonoBehaviour
     {
         //rotate vision cone accordingly.
         Vector2 curentVelocity = rigidbody.velocity;
-        float goalAngle = Vector2.Angle(curentVelocity, Vector2.right);
+        float goalAngle = 0;
+        if (vision.CanSeePlayer())
+        {
+            goalAngle = Vector2.Angle(GrandmaController.GetInstance().transform.position - this.transform.position,
+                Vector2.right);
+        }
+        else
+        {
+            goalAngle = Vector2.Angle(curentVelocity, Vector2.right);
+            goalAngle = goalAngle / 8;
+            goalAngle = Mathf.Round(goalAngle);
+            goalAngle *= 8;
+        }
 
-        goalAngle = goalAngle / 8;
-        goalAngle = Mathf.Round(goalAngle);
-        goalAngle *= 8;
+
+
+        
 
         float currentAngle = this.transform.rotation.eulerAngles.z;
 

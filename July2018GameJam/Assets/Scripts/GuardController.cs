@@ -10,7 +10,7 @@ public class GuardController : MonoBehaviour
     public List<Transform> targetPositions;
     public int targetPositionIndex = 0;
 
-    public DateTime timeGrannyLastSeen = DateTime.Now;
+    public float timeGrannyLastSeen;
     public Boolean followingGranny = false;
 
     private Seeker seeker;
@@ -26,10 +26,14 @@ public class GuardController : MonoBehaviour
 
     public bool reachedEndOfPath;
 
-
+    public VisionCone vision;
 
     public void Start()
     {
+        
+
+        timeGrannyLastSeen = Time.time;
+
         seeker = GetComponent<Seeker>();
 
         rigidbody = GetComponent<Rigidbody2D>();
@@ -53,6 +57,8 @@ public class GuardController : MonoBehaviour
 
     public void Update()
     {
+        if (vision.CanSeePlayer()) timeGrannyLastSeen = Time.time;
+
         if (path == null)
         {
             // We have no path to follow yet, so don't do anything
@@ -105,12 +111,12 @@ public class GuardController : MonoBehaviour
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
         GetComponent<Rigidbody2D>().velocity = velocity;
 
-        if (DateTime.Now.Subtract(timeGrannyLastSeen).Seconds < 1)
+        if (Time.time - timeGrannyLastSeen < 1)
         {
             followingGranny = true;
             path = null;
             seeker.StartPath(transform.position, GrandmaController.GetInstance().transform.position, OnPathComplete);
-        } else if (followingGranny && DateTime.Now.Subtract(timeGrannyLastSeen).Seconds >= 1)
+        } else if (followingGranny && Time.time - timeGrannyLastSeen >= 1)
         {
             followingGranny = false;
             path = null;

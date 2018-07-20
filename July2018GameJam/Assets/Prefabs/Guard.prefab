@@ -92,7 +92,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2902744ece9ff964cb0793fdd6089588, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,12 +175,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f08c7fc0e6b0f4d9633e46e7d0e20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPositions: []
+  targetPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   targetPositionIndex: 0
+  timeGrannyLastSeen: 0
   followingGranny: 0
   speed: 1.5
   nextWaypointDistance: 0.1
   reachedEndOfPath: 0
+  vision: {fileID: 114153562043921988}
 --- !u!114 &114153562043921988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,6 +252,7 @@ MonoBehaviour:
   viewMeshFilter: {fileID: 33983375973372908}
   rigidbody: {fileID: 50784726258097170}
   rotSpeed: 90
+  vision: {fileID: 114153562043921988}
 --- !u!212 &212259996512621022
 SpriteRenderer:
   m_ObjectHideFlags: 1
