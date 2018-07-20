@@ -48,23 +48,12 @@ public class VisionCone : MonoBehaviour
 	        foreach (Collider2D hit in hits)
 	        {
 	            int mask = LayerMask.GetMask("Walls", "Interactables");
-
-                RaycastHit2D directLine = Physics2D.Raycast(this.transform.position, hit.transform.position - this.transform.position,
+	            Debug.Log(mask);
+                RaycastHit2D directLine = Physics2D.Raycast(this.transform.position, hit.transform.position - this.transform.position, fov.viewRadius,
 	                mask );
-
-	            if (!directLine)
+	            if (directLine.collider == null) continue;
+	            if (directLine.transform.gameObject.GetComponent<GrandmaController>() != null)
 	            {
-
-	                continue;
-                }
-	            else
-	            {
-	                Debug.Log(hit.name + ": " + (bool) directLine);
-	            }
-	            if (hit.GetComponent<GrandmaController>() != null)
-	            {
-
-
 	                Vector2 guardToPlayer = (Vector2) (hit.transform.position - this.transform.position);
 
 	                float guardToPlayerAngle = Vector2.Angle(guardToPlayer, Vector2.right);
@@ -74,13 +63,11 @@ public class VisionCone : MonoBehaviour
                     
 
 
-	                if (Mathf.Abs(guardToPlayerAngle - guardAngle) <= fov.viewAngle && guardToPlayer.magnitude < fov.viewRadius)
+	                if (Mathf.Abs(guardToPlayerAngle - guardAngle) <= fov.viewAngle / 2 && guardToPlayer.magnitude < fov.viewRadius)
 	                {
 	                    GrannyVisible = true;
                     }
-	                
-
-	                if (GrannyVisible) Debug.Log("I can see Granny!");
+	               
                 }
 	            //other detectable objects go here
 	        }
