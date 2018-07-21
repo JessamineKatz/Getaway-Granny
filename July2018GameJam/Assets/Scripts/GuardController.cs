@@ -28,6 +28,12 @@ public class GuardController : MonoBehaviour
 
     public VisionCone vision;
 
+    private bool isDistracted;
+
+    private float distractedTime = 0.0f;
+
+    public float totalDistractedTime;
+
     public void Start()
     {
         
@@ -121,7 +127,20 @@ public class GuardController : MonoBehaviour
             followingGranny = false;
             path = null;
             seeker.StartPath(transform.position, targetPositions[targetPositionIndex].position, OnPathComplete);
-        } else if (reachedEndOfPath)
+        } else if (isDistracted && reachedEndOfPath)
+        {
+            if(distractedTime == 0.0f)
+            {
+                distractedTime = Time.time;
+            }
+            else if(Time.time - distractedTime >= totalDistractedTime)
+            {
+                distractedTime = 0.0f;
+                isDistracted = false;
+                PathToNextMarker();
+            }
+        } 
+        else if (reachedEndOfPath)
         {
             path = null;
             PathToNextMarker();
@@ -132,5 +151,15 @@ public class GuardController : MonoBehaviour
     {
         targetPositionIndex = ++targetPositionIndex == targetPositions.Count ? 0 : targetPositionIndex;
         seeker.StartPath(transform.position, targetPositions[targetPositionIndex].position, OnPathComplete);
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.name.Contains("Distraction") && !followingGranny)
+        {
+            isDistracted = true;
+            path = null;
+            seeker.StartPath(transform.position, col.transform.position, OnPathComplete);
+        }
     }
 }
