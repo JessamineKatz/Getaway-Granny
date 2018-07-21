@@ -185,7 +185,7 @@ MonoBehaviour:
   timeGrannyLastSeen: 0
   followingGranny: 0
   speed: 1.5
-  nextWaypointDistance: 0.05
+  nextWaypointDistance: 0.2
   reachedEndOfPath: 0
   vision: {fileID: 114153562043921988}
   totalDistractedTime: 3
