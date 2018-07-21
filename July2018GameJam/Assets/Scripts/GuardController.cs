@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GuardController : MonoBehaviour
 {
@@ -34,11 +35,13 @@ public class GuardController : MonoBehaviour
 
     public float totalDistractedTime;
 
+    public float followTime = 1;
+
     public void Start()
     {
         
 
-        timeGrannyLastSeen = Time.time;
+        timeGrannyLastSeen = -100;
 
         seeker = GetComponent<Seeker>();
 
@@ -84,6 +87,8 @@ public class GuardController : MonoBehaviour
             distanceToWaypoint = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
             if (distanceToWaypoint < nextWaypointDistance)
             {
+                
+
                 // Check if there is another waypoint or if we have reached the end of the path
                 if (currentWaypoint + 1 < path.vectorPath.Count)
                 {
@@ -117,12 +122,12 @@ public class GuardController : MonoBehaviour
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
         GetComponent<Rigidbody2D>().velocity = velocity;
 
-        if (Time.time - timeGrannyLastSeen < 1)
+        if (Time.time - timeGrannyLastSeen < this.followTime)
         {
             followingGranny = true;
             path = null;
             seeker.StartPath(transform.position, GrandmaController.GetInstance().transform.position, OnPathComplete);
-        } else if (followingGranny && Time.time - timeGrannyLastSeen >= 1)
+        } else if (followingGranny && Time.time - timeGrannyLastSeen >= followTime)
         {
             followingGranny = false;
             path = null;
@@ -160,6 +165,14 @@ public class GuardController : MonoBehaviour
             isDistracted = true;
             path = null;
             seeker.StartPath(transform.position, col.transform.position, OnPathComplete);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.GetComponent<GrandmaController>() != null)
+        {
+            SceneManager.LoadScene("LostScene");
         }
     }
 }

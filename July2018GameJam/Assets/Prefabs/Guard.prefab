@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 50784726258097170}
   - component: {fileID: 114245007376609512}
   - component: {fileID: 114142338744582858}
+  - component: {fileID: 114163251606276034}
   m_Layer: 9
   m_Name: Guard
   m_TagString: Untagged
@@ -57,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1059745310948636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.57, y: 1.52, z: 0}
+  m_LocalPosition: {x: -7.88, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4773226945103306}
@@ -155,14 +156,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.78125, y: 0.78125}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.78125, y: 0.78125}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &114142338744582858
 MonoBehaviour:
@@ -184,9 +185,11 @@ MonoBehaviour:
   timeGrannyLastSeen: 0
   followingGranny: 0
   speed: 1.5
-  nextWaypointDistance: 0.1
+  nextWaypointDistance: 0.05
   reachedEndOfPath: 0
   vision: {fileID: 114153562043921988}
+  totalDistractedTime: 3
+  followTime: 3
 --- !u!114 &114153562043921988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,6 +203,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 50784726258097170}
   rotSpeed: 0
+--- !u!114 &114163251606276034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1059745310948636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d2faa22ffa97441b0ece51f3c6f9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 21300000, guid: 97e8554d12b2aba4ba24e1fbca8f4d77, type: 3}
+  left: {fileID: 21300000, guid: 5b0aae289f6b2de4ca7f95f6a5ac8cbb, type: 3}
+  right: {fileID: 21300000, guid: 32f29e746bfb0b04ea6d689572cdd43c, type: 3}
+  down: {fileID: 21300000, guid: 8d835f1bab0fe984385f0819a171c5e2, type: 3}
 --- !u!114 &114245007376609512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -288,7 +306,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f801bd9ec1f81014dad1e752725db7c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d835f1bab0fe984385f0819a171c5e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
