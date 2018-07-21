@@ -56,14 +56,11 @@ public class VisionCone : MonoBehaviour
 	            {
 	                Vector2 guardToPlayer = (Vector2) (hit.transform.position - this.transform.position);
 
-	                float guardToPlayerAngle = Vector2.Angle(guardToPlayer, Vector2.right);
+	                float guardToPlayerAngle = Vector2.SignedAngle(guardToPlayer, Vector2.right);
 
 	                float guardAngle = this.transform.rotation.eulerAngles.z;
 
-                    
-
-
-	                if (Mathf.Abs(guardToPlayerAngle - guardAngle) <= fov.viewAngle / 2 && guardToPlayer.magnitude < fov.viewRadius)
+	                if (Math.Abs(FOVDraw.AngleDifference(guardAngle, guardToPlayerAngle)) <= fov.viewAngle / 2 && guardToPlayer.magnitude < fov.viewRadius)
 	                {
 	                    GrannyVisible = true;
                     }

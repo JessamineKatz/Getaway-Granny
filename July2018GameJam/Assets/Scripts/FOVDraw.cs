@@ -43,7 +43,6 @@ public class FOVDraw: MonoBehaviour
 
     void Start()
     {
-        this.viewAngle = 90;
         Debug.Log("Startin' vision cone up.");
         viewMesh = new Mesh();
         viewMesh.name = "View Mesh";
@@ -52,6 +51,11 @@ public class FOVDraw: MonoBehaviour
         vision = GetComponent<VisionCone>();
     }
 
+    public static float AngleDifference(float angle1, float angle2)
+    {
+        float diff = (angle2 - angle1 + 180) % 360 - 180;
+        return diff < -180 ? diff + 360 : diff;
+    }
 
     IEnumerator FindTargetsWithDelay(float delay)
     {
@@ -69,32 +73,30 @@ public class FOVDraw: MonoBehaviour
         float goalAngle = 0;
         if (vision.CanSeePlayer())
         {
-            goalAngle = Vector2.Angle(GrandmaController.GetInstance().transform.position - this.transform.position,
+            goalAngle = Vector2.SignedAngle(GrandmaController.GetInstance().transform.position - this.transform.position,
                 Vector2.right);
         }
         else
         {
-            goalAngle = Vector2.Angle(curentVelocity, Vector2.right);
+            goalAngle = Vector2.SignedAngle(curentVelocity, Vector2.right);
             goalAngle = goalAngle / 8;
             goalAngle = Mathf.Round(goalAngle);
             goalAngle *= 8;
         }
-
-
-
-        
-
         float currentAngle = this.transform.rotation.eulerAngles.z;
 
         float angleChange = rotSpeed * Time.deltaTime;
 
-        if (Mathf.Abs(angleChange) > Mathf.Abs(goalAngle - currentAngle))
+        float angleDistance = AngleDifference(currentAngle, goalAngle);
+
+        if (angleDistance < 0) angleChange *= -1;
+
+        if (Mathf.Abs(angleChange) > Mathf.Abs(angleDistance))
         {
             this.transform.rotation = Quaternion.Euler(0, 0, goalAngle);
         }
         else
         {
-            angleChange *= Mathf.Sign(goalAngle - currentAngle);
             this.transform.rotation = Quaternion.Euler(0, 0, currentAngle + angleChange);
         }
 
@@ -172,6 +174,8 @@ public class FOVDraw: MonoBehaviour
         for (int i = 0; i < vertexCount - 1; i++)
         {
             vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
+
+
 
             if (i < vertexCount - 2)
             {
