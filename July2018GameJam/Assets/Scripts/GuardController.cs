@@ -118,9 +118,7 @@ public class GuardController : MonoBehaviour
         // Multiply the direction by our desired speed to get a velocity
         Vector3 velocity = dir * speed * speedFactor;
 
-        // Move the agent
-        // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
-        GetComponent<Rigidbody2D>().velocity = velocity;
+        
 
         if (Time.time - timeGrannyLastSeen < this.followTime)
         {
@@ -134,6 +132,7 @@ public class GuardController : MonoBehaviour
             seeker.StartPath(transform.position, targetPositions[targetPositionIndex].position, OnPathComplete);
         } else if (isDistracted && reachedEndOfPath)
         {
+            velocity = dir * 0;
             if(distractedTime == 0.0f)
             {
                 distractedTime = Time.time;
@@ -142,6 +141,7 @@ public class GuardController : MonoBehaviour
             {
                 distractedTime = 0.0f;
                 isDistracted = false;
+                targetPositionIndex--;
                 PathToNextMarker();
             }
         } 
@@ -150,6 +150,10 @@ public class GuardController : MonoBehaviour
             path = null;
             PathToNextMarker();
         }
+
+        // Move the agent
+        // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
+        GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     private void PathToNextMarker()
