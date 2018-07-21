@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu Themed.unity
+    guid: c7fab2c496af54a42a5bc235bc1a92dd
+  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 74519134f898d6f4dae0eba352da8e85
   - enabled: 1
@@ -17,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LostScene.unity
     guid: 0141593a0a8e05f48bdf60a38c7f2d3f
+  - enabled: 1
+    path: Assets/Scenes/NursingHome.unity
+    guid: 399760f9d0d592f449db7487d415fbf5
   m_configObjects: {}
