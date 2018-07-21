@@ -54972,11 +54972,6 @@ Prefab:
     m_Modifications:
     - target: {fileID: 224500134691189900, guid: 1f64b4ff11dac6649bb8482d886c3e93,
         type: 2}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 224500134691189900, guid: 1f64b4ff11dac6649bb8482d886c3e93,
-        type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -55064,6 +55059,25 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224642175753351150, guid: 1f64b4ff11dac6649bb8482d886c3e93,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990719323593476, guid: 1f64b4ff11dac6649bb8482d886c3e93, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224896044558352442, guid: 1f64b4ff11dac6649bb8482d886c3e93,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224642175753351150, guid: 1f64b4ff11dac6649bb8482d886c3e93,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 250
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f64b4ff11dac6649bb8482d886c3e93, type: 2}
@@ -55276,22 +55290,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114621356950647490, guid: d9679ca88f149cd4f8cba5292bb55cac,
-        type: 2}
-      propertyPath: slipperCountText
-      value: 
-      objectReference: {fileID: 99629387}
     - target: {fileID: 114700202391161700, guid: d9679ca88f149cd4f8cba5292bb55cac,
         type: 2}
       propertyPath: slipperCountText
       value: 
       objectReference: {fileID: 99629387}
-    - target: {fileID: 114700202391161700, guid: d9679ca88f149cd4f8cba5292bb55cac,
-        type: 2}
-      propertyPath: sliperPrefab
-      value: 
-      objectReference: {fileID: 1482621506702934, guid: 29651a127df68144899e65ecbca9d2bb,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9679ca88f149cd4f8cba5292bb55cac, type: 2}
   m_IsPrefabAsset: 0

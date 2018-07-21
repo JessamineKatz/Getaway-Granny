@@ -1178,7 +1178,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 847b899781c6d12438aad6de928baeff, type: 3}
     m_FontSize: 24
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 4
@@ -1187,9 +1187,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is a text field for helpful information about the game such as that
-    this game was made for the Nexus GameJam 2018.  Made by Sam Katz, Alyssa Garguilo,
-    Jake Smith, and Tyler Davis
+  m_Text: 'This game was made for the Nexus GameJam 2018.  Made by Sam Katz, Alyssa
+    Garguilo, Jake Smith, and Tyler Davis.
+
+
+    Controls:
+
+
+    WASD - Move
+
+    Left click - Throw Slipper'
 --- !u!222 &1064199609
 CanvasRenderer:
   m_ObjectHideFlags: 0

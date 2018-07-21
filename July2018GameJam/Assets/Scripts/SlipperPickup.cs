@@ -12,7 +12,7 @@ public class SlipperPickup : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         GrandmaController granny = other.GetComponent<GrandmaController>();
-
+        granny.MakeSpeechBubble("A pair of slippers. Maybe I can throw one to make a noise.");
         if (granny != null)
         {
             Destroy(this.gameObject);

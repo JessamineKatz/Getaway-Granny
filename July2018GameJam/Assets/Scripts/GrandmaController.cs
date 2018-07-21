@@ -13,6 +13,7 @@ public class GrandmaController : MonoBehaviour
     private static GameObject granny;
 
     public GameObject sliperPrefab;
+    public GameObject speechPrefab;
     public Text slipperCountText;
 
     public int slipperCount = 0;
@@ -27,11 +28,32 @@ public class GrandmaController : MonoBehaviour
 	{
 	    granny = this.gameObject;
 	    Rigidbody = this.GetComponent<Rigidbody2D>();
+
+        MakeSpeechBubble("I need to find the bus stop before those rude fellows find me.");
     }
 
     float GetSpeed() //exists so it's easy to add movement slowing effect later.
     {
         return BaseSpeed; 
+    }
+
+
+    public void MakeSpeechBubble(string text)
+    {
+        Transform oldSpeech = this.transform.Find("speechBubble(Clone)");
+        if (oldSpeech != null)
+        {
+            Destroy(oldSpeech.gameObject);
+        }
+        
+
+        GameObject speech = Instantiate(speechPrefab);
+        speech.transform.SetParent(this.gameObject.transform);
+
+        
+
+        speech.transform.Find("Canvas").transform.Find("Text").GetComponent<Text>().text = text;
+        speech.transform.localPosition = new Vector3(0, 1.3f, 0);
     }
 
     // Update is called once per frame

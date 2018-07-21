@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503204725607414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.24, y: -7.5, z: 0}
+  m_LocalPosition: {x: -6.25, y: -3.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4267255617340212}
@@ -179,7 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseSpeed: 15
-  sliperPrefab: {fileID: 1497274787506744, guid: 9f894819e05d75a4c8c3c8d28d763d46,
+  sliperPrefab: {fileID: 1482621506702934, guid: 29651a127df68144899e65ecbca9d2bb,
+    type: 2}
+  speechPrefab: {fileID: 1113953690441118, guid: 4fda885f7d32ce048a18a59b24d3d34e,
     type: 2}
   slipperCountText: {fileID: 0}
   slipperCount: 0
