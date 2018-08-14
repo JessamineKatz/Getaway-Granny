@@ -21,22 +21,25 @@ public class LazyAnimator : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	    if (rigidbody.velocity.x > 0)
+
+        
+
+	    if (Input.GetAxisRaw("Horizontal") > 0)
 	    {
 	        renderer.sprite = right;
         }
 
-	    if (rigidbody.velocity.x < 0)
+	    if (Input.GetAxisRaw("Horizontal") < 0)
 	    {
 	        renderer.sprite = left;
 	    }
 
-	    if (rigidbody.velocity.y > 0)
+	    if (Input.GetAxisRaw("Vertical") > 0)
 	    {
 	        renderer.sprite = up;
 	    }
 
-	    if (rigidbody.velocity.y < 0)
+	    if (Input.GetAxisRaw("Vertical") < 0)
 	    {
 	        renderer.sprite = down;
 	    }
