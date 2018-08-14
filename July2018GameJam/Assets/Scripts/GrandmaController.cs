@@ -41,6 +41,7 @@ public class GrandmaController : MonoBehaviour
     public void MakeSpeechBubble(string text)
     {
         Transform oldSpeech = this.transform.Find("speechBubble(Clone)");
+        transform.position += new Vector3(0,0,-10);
         if (oldSpeech != null)
         {
             Destroy(oldSpeech.gameObject);
@@ -64,7 +65,7 @@ public class GrandmaController : MonoBehaviour
 	    yInput = Input.GetAxisRaw("Vertical");
 	    xInput = Input.GetAxisRaw("Horizontal");
 
-        Rigidbody.velocity = new Vector2(xInput, yInput);
+        Rigidbody.velocity = new Vector2(xInput, yInput) * BaseSpeed;
 
 
         if (Input.GetButtonDown("Fire1") && slipperCount > 0)

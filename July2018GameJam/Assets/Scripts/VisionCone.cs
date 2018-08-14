@@ -10,12 +10,16 @@ public class VisionCone : MonoBehaviour
     private FOVDraw fov;
     public float rotSpeed;
 
+    private float defaultRange;
+
 	// Use this for initialization
 	void Start ()
 	{
 	    fov = GetComponent<FOVDraw>();
-
+	    defaultRange = fov.viewRadius;
 	}
+
+    
 
     private float LastVisionCheck = -100;
 
@@ -37,6 +41,16 @@ public class VisionCone : MonoBehaviour
 
     void Update ()
 	{
+	    if (GrannyVisible)
+	    {
+	        fov.viewRadius = 100;
+        }
+	    else
+	    {
+	        fov.viewRadius = defaultRange;
+	    }
+
+
         //check visibility
 	    if (Time.time - LastVisionCheck > VisionCheckInterval)
 	    {

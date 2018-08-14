@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 4267255617340212}
   - component: {fileID: 20174676754188524}
   - component: {fileID: 81290196589400540}
+  - component: {fileID: 114253490337645228}
   m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -167,6 +168,22 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621423493327150}
   m_Enabled: 1
+--- !u!114 &114253490337645228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1621423493327150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91b479d336e380c429e1727d8e7841f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -13
+  maxX: 68
+  minY: -50
+  maxY: 10
+  cam: {fileID: 20174676754188524}
 --- !u!114 &114700202391161700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbda192c0104094e9ae7bde1a0c1bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseSpeed: 15
+  BaseSpeed: 1
   sliperPrefab: {fileID: 1482621506702934, guid: 29651a127df68144899e65ecbca9d2bb,
     type: 2}
   speechPrefab: {fileID: 1113953690441118, guid: 4fda885f7d32ce048a18a59b24d3d34e,
